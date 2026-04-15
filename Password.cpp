@@ -26,3 +26,15 @@ int Password::count_leading_characters(string phrase){
 bool Password::has_mixed_case(string pass){
   return false;
 }
+
+unsigned int unique_characters(string str){
+  bool seen[256] = {false};
+  unsigned int count = 0;
+
+  for (char c : str){
+      if (!seen[(unsigned char)c]){
+        seen[(unsigned char)c] = true;
+        count++;
+      }
+  }
+}
