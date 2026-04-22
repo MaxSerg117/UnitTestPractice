@@ -1,30 +1,34 @@
 #include "Password.h"
 #include <string>
+#include <cctype>
 
 using std::string;
 
-/*
-  The function receives a string counts how many times the same character 
-  occurs at the beginning of the string, before any other characters (or the
-  end of the string). The function is case-sensitive so 'Z' is different than
-  'z' and any ASCII characters are allowed.
-*/
 int Password::count_leading_characters(string phrase){
+  if (phrase.length() == 0) return 0;
+
   int repetition = 1;
   int index = 0;
-  while( index < phrase.length()-1 && phrase[index] == phrase[index+1] ){
+
+  while(index < (int)phrase.length() - 1 &&
+        phrase[index] == phrase[index + 1]) {
     repetition++;
     index++;
   }
+
   return repetition;
 }
 
-/*
-  receives a string and returns whether it has both at least one upper-case
-  letter and at least one lower-case letter
-*/
 bool Password::has_mixed_case(string pass){
-  return false;
+  bool hasUpper = false;
+  bool hasLower = false;
+
+  for (char c : pass){
+    if (std::isupper((unsigned char)c)) hasUpper = true;
+    if (std::islower((unsigned char)c)) hasLower = true;
+  }
+
+  return hasUpper && hasLower;
 }
 
 unsigned int unique_characters(string str){
@@ -32,9 +36,12 @@ unsigned int unique_characters(string str){
   unsigned int count = 0;
 
   for (char c : str){
-      if (!seen[(unsigned char)c]){
-        seen[(unsigned char)c] = true;
-        count++;
-      }
+    unsigned char uc = (unsigned char)c;
+    if (!seen[uc]){
+      seen[uc] = true;
+      count++;
+    }
   }
+
+  return count;
 }

@@ -10,6 +10,7 @@ CXXFLAGS += -g -pthread
 TESTS = PasswordTest
 
 # All Google Test headers. Adjust only if you moved the subdirectory
+GTEST_DIR = ./gtest/googletest
 GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
                 $(GTEST_DIR)/include/gtest/internal/*.h
 
